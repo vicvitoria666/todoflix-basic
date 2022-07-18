@@ -22,11 +22,10 @@ const apiMovies = axios.create({
 export default class Movies extends React.Component{
   state={
     listMovies:[],
-    resultFilmes:[],
+    resultMovies:[],
   }
  componentDidMount(){
   this.getFilmes()
-   //use o conslole log com resonse para lembrar o caminho
   }
   getFilmes = async () => {
 
@@ -39,20 +38,20 @@ export default class Movies extends React.Component{
 
      this.setState({
        listMovies: Movies,
-       resultFilmes:Movies
+       resultMovies:Movies
      })
   }
 
-  buscarFilmes =(event ) =>{
+  searchMovies =(event ) =>{
     let {listMovies} = this.state
-    const filmesFiltrados = listMovies.filter(item => {
+    const moviesFiltrados = listMovies.filter(item => {
       if(item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
         return true;
       }
     })
 
     this.setState({
-      resultFilmes: filmesFiltrados
+      resultMovies: moviesFiltrados
     })
   }
   
@@ -61,10 +60,10 @@ export default class Movies extends React.Component{
 
     return(
       <div>
-        <h1>Filmes</h1>
-        <input type="text" onChange={this.buscarFilmes} placeholder="Pesquisar filmes"  />
+        <h1>Movies</h1>
+        <input type="text" onChange={this.searchMovies} placeholder="Search"  />
         <ul>
-          {this.state.resultFilmes.map(item => (
+          {this.state.resultMovies.map(item => (
             <div>
             <h2>{item.title}</h2>
 
